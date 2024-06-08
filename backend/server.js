@@ -8,6 +8,13 @@ const jwt = require("jsonwebtoken");
 const cookieparser = require("cookie-parser");
 const registerusermodel = require("./models/registeruser");
 const app = express();
+app.use(
+  cors({
+    origin: ["https://sivausers-management-system.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(cors());
 app.use(express.json());
 app.use(cookieparser());
