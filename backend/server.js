@@ -29,9 +29,9 @@ async function connectDB() {
 }
 
 connectDB();
-app.get("/", (req, res) => {
-  res.send("hello Server is running...");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello Server is running...");
+// });
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
   bcrypt
@@ -88,7 +88,7 @@ app.get("/createtodo", (req, res) => {
 app.get("/", (req, res) => {
   usermodel
     .find({})
-    .then((users) => res.json(users))
+    .then((users) => res.json(users), res.send("hello Server is running..."))
     .catch((err) => console.log(err));
 });
 app.get("/Updateuser/:id", (req, res) => {
