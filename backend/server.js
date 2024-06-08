@@ -13,9 +13,25 @@ app.use(express.json());
 app.use(cookieparser());
 // mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
 // mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
-mongoose.connect(
-  "mongodb+srv://sivasurya27052001:NuTy0JPTLOBHzDAm@cluster0.8zmewxw.mongodb.net/"
-);
+const mongoUri =
+  "mongodb+srv://sivasurya27052001:NuTy0JPTLOBHzDAm@cluster0.8zmewxw.mongodb.net/test"; // Replace 'yourDatabaseName' with your actual database name
+async function connectDB() {
+  try {
+    await mongoose.connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+    process.exit(1); // Exit process with failure
+  }
+}
+
+connectDB();
+app.get("/", (req, res) => {
+  res.send("hello Server is running...");
+});
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
   bcrypt
