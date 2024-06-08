@@ -88,7 +88,7 @@ app.get("/createtodo", (req, res) => {
 app.get("/", (req, res) => {
   usermodel
     .find({})
-    .then((users) => res.json(users), res.send("hello Server is running..."))
+    .then((users) => res.json(users))
     .catch((err) => console.log(err));
 });
 app.get("/Updateuser/:id", (req, res) => {
