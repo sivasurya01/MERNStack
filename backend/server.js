@@ -11,7 +11,7 @@ const app = express();
 app.use(
   cors({
     origin: ["https://sivausers-management-system.vercel.app"],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -21,7 +21,7 @@ app.use(cookieparser());
 // mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
 // mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
 const mongoUri =
-  "mongodb+srv://sivasurya27052001:NuTy0JPTLOBHzDAm@cluster0.8zmewxw.mongodb.net/test"; // Replace 'yourDatabaseName' with your actual database name
+  "mongodb+srv://sivasurya27052001:NuTy0JPTLOBHzDAm@cluster0.8zmewxw.mongodb.net/test";
 async function connectDB() {
   try {
     await mongoose.connect(mongoUri, {
