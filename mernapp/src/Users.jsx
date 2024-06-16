@@ -25,7 +25,7 @@ function Users() {
     <div>
       <div className="flex justify-end mr-10 mt-10 rounded-md mb-5">
         <NavLink to={"/CreateUser"}>
-          <button className="p-2 bg-green-400 text-white rounded-md">
+          <button className="p-2 bg-[#7e22ce] text-white rounded-md">
             CreateUser
           </button>
         </NavLink>
