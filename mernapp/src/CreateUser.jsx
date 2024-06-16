@@ -11,7 +11,7 @@ function CreateUser() {
   const submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/createUser", user)
+      .post(`${import.meta.env.VITE_API_URL}createUser`, user)
       .then((user) => {
         console.log(user);
         navigate("/");

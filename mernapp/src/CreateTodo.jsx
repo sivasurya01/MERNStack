@@ -11,7 +11,7 @@ function CreateTodo() {
   const addtodo = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/createtodo", { todo })
+      .post(`${import.meta.env.VITE_API_URL}createtodo`, { todo })
       .then((todo) => {
         console.log(todo);
         toast.success("Created Sucessfully");
@@ -20,7 +20,7 @@ function CreateTodo() {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:3000/createtodo")
+      .get(`${import.meta.env.VITE_API_URL}createtodo`)
       .then((todo) => {
         console.log(todo);
         setGettodo(todo.data);

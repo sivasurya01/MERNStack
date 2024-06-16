@@ -7,14 +7,14 @@ function Users() {
   console.log(user, "users");
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users/users/")
+      .get(`${import.meta.env.VITE_API_URL}users/users/`)
       .then((res) => setUser(res.data))
       .catch((err) => console.log(err));
   }, []);
   const deletefun = (e, id) => {
     e.preventDefault();
     axios
-      .delete("http://localhost:3000/delete/" + id)
+      .delete(`${import.meta.env.VITE_API_URL}delete/` + id)
       .then((res) => {
         console.log(res.data);
         window.location.reload(true);

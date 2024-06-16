@@ -9,7 +9,11 @@ function Register() {
   const onsubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/register", { name, email, password })
+      .post(`${import.meta.env.VITE_API_URL}register`, {
+        name,
+        email,
+        password,
+      })
       .then((user) => {
         console.log(user);
         navigate("/login");

@@ -8,7 +8,7 @@ function Login() {
   const handleonsubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/login", { email, password })
+      .post(`${import.meta.env.VITE_API_URL}login`, { email, password })
       .then((user) => console.log(user, "sucess"))
       .catch((err) => console.log(err));
   };

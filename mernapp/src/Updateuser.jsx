@@ -22,7 +22,7 @@ function Updateuser() {
   const submit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:3000/Update/" + id, {
+      .put(`${import.meta.env.VITE_API_URL}Update/` + id, {
         username: name ? name : users.username,
         email: email ? email : users.email,
         nunmber: num ? num : users.nunmber,
@@ -37,7 +37,7 @@ function Updateuser() {
     const submit = (e) => {
       // e.preventDefault();
       axios
-        .get("http://localhost:3000/Updateuser/" + id)
+        .get(`${import.meta.env.VITE_API_URL}Updateuser/` + id)
         .then((user) => {
           console.log(user);
           setUsers(user.data);
