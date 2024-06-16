@@ -5,6 +5,7 @@ const usermodel = require("./models/User");
 const todomodel = require("./models/Todo");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const cookieparser = require("cookie-parser");
 const registerusermodel = require("./models/registeruser");
 const app = express();
@@ -20,8 +21,7 @@ app.use(express.json());
 app.use(cookieparser());
 // mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
 // mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
-const mongoUri =
-  "mongodb+srv://sivasurya27052001:NuTy0JPTLOBHzDAm@cluster0.8zmewxw.mongodb.net/test";
+const mongoUri = process.env.MONGO_URI;
 async function connectDB() {
   try {
     await mongoose.connect(mongoUri, {
