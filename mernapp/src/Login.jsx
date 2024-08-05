@@ -72,6 +72,7 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   type={type}
                   name="password"
+                  required
                   value={password}
                 />
                 <span className="absolute right-3 top-7 transform -translate-y-1/2">
