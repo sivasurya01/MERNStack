@@ -16,7 +16,7 @@ function Register() {
       })
       .then((user) => {
         console.log(user);
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => console.log(err));
   };
@@ -108,7 +108,7 @@ function Register() {
             {" "}
             already have an account ?
             <Link
-              to={"/login"}
+              to={"/"}
               className="font-medium text-purple-600 hover:underline"
             >
               Please Login{" "}

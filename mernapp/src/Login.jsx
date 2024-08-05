@@ -1,15 +1,21 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleonsubmit = (e) => {
     e.preventDefault();
     axios
       .post(`${import.meta.env.VITE_API_URL}login`, { email, password })
-      .then((user) => console.log(user, "sucess"))
+      .then((user) => {
+        console.log(user, "sucess");
+        if (user.status == 200) {
+          navigate("/user");
+        }
+      })
       .catch((err) => console.log(err));
   };
   return (

@@ -29,7 +29,7 @@ function Updateuser() {
       })
       .then((user) => {
         console.log(user);
-        navigate("/");
+        navigate("/user");
       })
       .catch((err) => console.log(err));
   };

@@ -15,7 +15,7 @@ function App() {
         <Routes>
           {/* <Suspense fallback={<p>Loading...</p>}> */}
           <Route
-            path="/"
+            path="/user"
             element={
               <Suspense
                 fallback={
@@ -38,7 +38,7 @@ function App() {
           ></Route>
           {/* </Suspense> */}
           <Route path="/Register" element={<Register />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
+          <Route path="/" element={<Login />}></Route>
           <Route path="/CreateUser" element={<CreateUser />}></Route>
           <Route
             path="/Updateuser/:id"
