@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [type, setType] = useState("password");
+
   const onsubmit = (e) => {
     e.preventDefault();
     axios
@@ -87,13 +90,28 @@ function Register() {
               <label className="block text-sm font-semibold text-gray-800">
                 Password
               </label>
-              <input
-                className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                onChange={(e) => setPassword(e.target.value)}
-                // required
-                type="password"
-                name="nunmber"
-              />
+              <div className="relative flex items-center">
+                <input
+                  className="block w-full px-4 py-2 mt-2 text-purple-700 border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  onChange={(e) => setPassword(e.target.value)}
+                  type={type}
+                  name="password"
+                  value={password}
+                />
+                <span className="absolute right-3 top-7 transform -translate-y-1/2">
+                  {type === "password" ? (
+                    <IoEyeOutline
+                      onClick={() => setType("text")}
+                      className="cursor-pointer text-gray-500"
+                    />
+                  ) : (
+                    <IoEyeOffOutline
+                      onClick={() => setType("password")}
+                      className="cursor-pointer text-gray-500"
+                    />
+                  )}
+                </span>
+              </div>
             </div>
             <div className="mt-6">
               <button
