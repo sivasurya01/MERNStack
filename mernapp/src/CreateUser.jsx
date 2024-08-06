@@ -14,7 +14,7 @@ function CreateUser() {
       .post(`${import.meta.env.VITE_API_URL}createUser`, user)
       .then((user) => {
         console.log(user);
-        navigate("/");
+        navigate("/user");
       })
       .catch((err) => console.log(err));
   };
