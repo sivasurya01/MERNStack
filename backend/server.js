@@ -52,27 +52,44 @@ app.post("/register", (req, res) => {
     .catch((err) => res.json(err));
 });
 //login route
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  registerusermodel.findOne({ email: email }).then((user) => {
-    if (user) {
-      bcrypt.compare(password, user.password, (err, response) => {
-        if (response) {
-          const token = jwt.sign(
-            { email: user.email, role: user.role },
-            "jwt-secret-key",
-            { expiresIn: "1h" }
-          );
-          res.cookie("token", token);
-          return res.json(user);
-        } else {
-          return res.json("the password is incorrect");
-        }
-      });
-    } else {
-      return res.json("no record exit");
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Check if the email and password are provided
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
     }
-  });
+
+    const user = await registerusermodel.findOne({ email: email });
+
+    // If user not found
+    if (!user) {
+      return res.status(404).json({ message: "No record exists" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    // If password does not match
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "The password is incorrect" });
+    }
+
+    // If password matches
+    const token = jwt.sign(
+      { email: user.email, role: user.role },
+      "jwt-secret-key",
+      { expiresIn: "1h" }
+    );
+
+    res.cookie("token", token, { httpOnly: true, secure: true }); // Ensure secure in production
+    return res.json({ user, token });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 });
 app.post("/createUser", (req, res) => {
   usermodel
