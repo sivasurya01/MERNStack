@@ -42,7 +42,7 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: "Unauth" });
   }
   try {
-    const decode = jwt.verify(token, "jwt-secret-key");
+    const decode = jwt.verify(token);
     res.user = decode;
     next();
   } catch (e) {
