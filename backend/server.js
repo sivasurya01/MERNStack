@@ -5,6 +5,7 @@ const usermodel = require("./models/User");
 const todomodel = require("./models/Todo");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const USER = false;
 require("dotenv").config();
 const cookieparser = require("cookie-parser");
 const registerusermodel = require("./models/registeruser");
@@ -20,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieparser());
 // mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
-// mongoose.connect("mongodb://127.0.0.1:27017/sivasurya")
+// mongoose.connect("mongodb://127.0.0.1:27017/sivasurya");
 const mongoUri = process.env.MONGO_URI;
 async function connectDB() {
   try {
@@ -85,6 +86,7 @@ app.post("/login", async (req, res) => {
     );
 
     res.cookie("token", token, { httpOnly: true, secure: true }); // Ensure secure in production
+    USER = true;
     return res.json({ user, token });
   } catch (error) {
     console.error(error);
@@ -109,12 +111,14 @@ app.get("/createtodo", (req, res) => {
     .then((todo) => res.json(todo))
     .catch((err) => res.json(err));
 });
-app.get("/users/users", async (req, res) => {
-  usermodel
-    .find({})
-    .then(async (users) => await res.json(users))
-    .catch((err) => console.log(err));
-});
+if (USER == true) {
+  app.get("/users/users", async (req, res) => {
+    usermodel
+      .find({})
+      .then(async (users) => await res.json(users))
+      .catch((err) => console.log(err));
+  });
+}
 app.get("/Updateuser/:id", (req, res) => {
   let id = req.params.id;
   usermodel
