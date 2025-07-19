@@ -36,6 +36,19 @@ async function connectDB() {
 }
 
 connectDB();
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "Unauth" });
+  }
+  try {
+    const decode = jwt.verify(token, "jwt-secret-key");
+    res.user = decode;
+    next();
+  } catch (e) {
+    return res.status(401).json({ message: "Unauth" });
+  }
+};
 app.get("/", (req, res) => {
   res.send("hello Server is running...");
 });
@@ -109,7 +122,7 @@ app.get("/createtodo", (req, res) => {
     .then((todo) => res.json(todo))
     .catch((err) => res.json(err));
 });
-app.get("/users/users", async (req, res) => {
+app.get("/users/users", authMiddleware, async (req, res) => {
   usermodel
     .find({})
     .then(async (users) => await res.json(users))
