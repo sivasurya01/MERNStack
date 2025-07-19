@@ -121,7 +121,7 @@ app.get("/createtodo", (req, res) => {
     .then((todo) => res.json(todo))
     .catch((err) => res.json(err));
 });
-app.get("/users/users", authMiddleware, async (req, res) => {
+app.get("/users/users", async (req, res) => {
   usermodel
     .find({})
     .then(async (users) => await res.json(users))
