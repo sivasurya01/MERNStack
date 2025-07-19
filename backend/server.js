@@ -42,8 +42,7 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: "Unauth" });
   }
   try {
-    const decode = jwt.verify(token);
-    res.user = decode;
+    res.user = token;
     next();
   } catch (e) {
     return res.status(401).json({ message: "Unauth" });
