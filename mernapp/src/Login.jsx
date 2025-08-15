@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
+import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -19,10 +20,14 @@ function Login() {
           navigate("/user");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error("Please Enter vaild Credentials");
+      });
   };
   return (
     <div>
+      <ToastContainer />
       {/* <form onSubmit={handleonsubmit}>
         <label for="">Email</label>
         <br></br>

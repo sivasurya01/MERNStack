@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -19,12 +20,14 @@ function Register() {
       })
       .then((user) => {
         console.log(user);
+        toast.success("User Register Successfully");
         navigate("/");
       })
       .catch((err) => console.log(err));
   };
   return (
     <div>
+      <ToastContainer />
       {/* <form onSubmit={onsubmit}>
         <label for="fname"> Name</label>
         <br />
