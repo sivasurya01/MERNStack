@@ -20,8 +20,8 @@ function Register() {
       })
       .then((user) => {
         console.log(user);
-        toast.success("User Register Successfully");
-        navigate("/");
+        toast.success("User Registeration Successfull Please Login");
+        // navigate("/");
       })
       .catch((err) => console.log(err));
   };
